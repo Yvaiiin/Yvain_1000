@@ -1,0 +1,313 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    --primary: #0F4C75;       /* Bleu Pharma Foncé */
+    --accent: #3BBA9C;        /* Vert Menthe/Santé */
+    --dark: #1B262C;
+    --light: #F0F5F9;
+    --white: #FFFFFF;
+    --glass: rgba(255, 255, 255, 0.7);
+    --shadow: 0 10px 30px rgba(15, 76, 117, 0.08);
+    --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- ANIMATED BACKGROUND (BLOBS) --- */
+.background-animation {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: floatBlob 20s infinite alternate;
+}
+
+.blob-1 { width: 500px; height: 500px; background: #dbeafe; top: -100px; left: -100px; }
+.blob-2 { width: 400px; height: 400px; background: #d1fae5; bottom: -50px; right: -50px; animation-delay: -5s; }
+.blob-3 { width: 300px; height: 300px; background: #e0f2fe; top: 40%; left: 30%; animation-delay: -10s; }
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* --- TYPOGRAPHY & UTILS --- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 80px 0; }
+.text-white { color: white !important; }
+.bg-blue { background-color: var(--primary); color: white; }
+.bg-white-glass { background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); }
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-desc { text-align: center; max-width: 600px; margin: 0 auto 3rem auto; color: #52667a; }
+
+/* --- BUTTONS --- */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(15, 76, 117, 0.3); }
+.btn-primary:hover { background: #0a3857; transform: translateY(-2px); }
+
+.btn-secondary { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.btn-secondary:hover { background: var(--primary); color: white; }
+
+/* --- HEADER --- */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 0;
+}
+
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+.logo span { color: var(--accent); }
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--primary); }
+.cta-mobile { display: none; }
+
+/* Burger Menu */
+.burger { display: none; cursor: pointer; }
+.burger div { width: 25px; height: 3px; background-color: var(--primary); margin: 5px; transition: all 0.3s ease; }
+
+/* --- HERO --- */
+.hero-section {
+    padding-top: 160px;
+    padding-bottom: 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+
+.badge {
+    background: #3bba9d; color: #ffffff;
+    padding: 5px 15px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+    display: inline-block; margin-bottom: 1rem;
+}
+
+.hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; color: var(--dark); }
+.subtitle { font-size: 1.2rem; color: #52667a; margin-bottom: 2.5rem; }
+.hero-buttons { display: flex; gap: 15px; }
+
+.hero-image img {
+    width: 100%; max-width: 600px;
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,0.15));
+    animation: floatBox 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes floatBox {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* --- CARDS (INDICATIONS) --- */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+.card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.card h3 { color: var(--primary); margin-bottom: 1rem; }
+.label-action { display: block; font-weight: 800; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem; }
+
+/* --- TABLE (COMPOSITION) --- */
+.composition-layout { display: flex; flex-direction: column; align-items: center; }
+
+.pharma-table {
+    background: var(--white);
+    width: 100%; max-width: 700px;
+    border: 2px solid var(--primary);
+    padding: 30px;
+}
+
+.table-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--dark); padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; }
+.table-title-row { background: #f0f0f0; padding: 5px; font-weight: 700; margin: 10px 0; font-size: 0.9rem; }
+
+.table-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #eee;
+}
+
+.main-active { color: var(--primary); font-size: 1.1rem; }
+.row-left .sub-text { display: block; font-size: 0.8rem; color: #777; font-weight: 400; }
+.row-right { font-weight: 600; text-align: right; }
+
+/* --- ACCORDION (MISES EN GARDE) --- */
+.accordion { max-width: 800px; margin: 0 auto; }
+.accordion-item { background: var(--white); border-radius: 8px; margin-bottom: 15px; box-shadow: var(--shadow); overflow: hidden; }
+.acc-header {
+    padding: 20px; font-weight: 700; color: var(--primary);
+    cursor: default; /* Simplifié pour l'exemple, pas de JS toggle nécessaire pour lecture seule */
+    border-left: 5px solid var(--accent);
+}
+.acc-body { padding: 0 20px 20px 20px; color: #555; }
+
+/* --- REVIEWS --- */
+.reviews-grid { display: flex; justify-content: center; }
+.review-card {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px; border-radius: var(--radius); max-width: 600px; text-align: center;
+}
+.review-text { font-size: 1.2rem; font-style: italic; margin-bottom: 20px; }
+.review-author { display: flex; align-items: center; justify-content: center; gap: 15px; }
+.avatar { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary); }
+
+/* --- FOOTER --- */
+.footer { background: var(--white); padding: 80px 0 20px 0; text-align: center; border-top: 1px solid #eee; }
+.footer-cta { margin-bottom: 50px; }
+.footer-cta h3 { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+.big-btn { padding: 15px 40px; font-size: 1.1rem; }
+.phone-ref { margin-top: 15px; color: #888; }
+.legal-disclaimer { border-top: 1px solid #eee; padding-top: 20px; font-size: 0.8rem; color: #999; max-width: 800px; margin: 0 auto; }
+
+/* --- ANIMATIONS & RESPONSIVE --- */
+.fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.visible { opacity: 1; transform: translateY(0); }
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+
+@media (max-width: 968px) {
+    /* 1. Ajustement de la grille Hero et du texte */
+    .hero-grid { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+    }
+    
+    .hero-buttons { 
+        justify-content: center; 
+    }
+    
+    .hero-content h1 { 
+        font-size: 2.5rem; 
+    }
+    
+    /* L'image passe au-dessus du texte sur mobile */
+    .hero-image { 
+        grid-row: 1; 
+        margin-bottom: 30px; 
+    } 
+    
+    /* 2. Menu Mobile (Correction de l'alignement vertical) */
+    .nav-links {
+        position: absolute; 
+        right: 0; 
+        top: 70px; /* Ajustez selon la hauteur de votre header */
+        height: 90vh; 
+        background: white;
+        
+        /* C'est ici que l'alignement vertical est forcé */
+        display: flex;
+        flex-direction: column; /* Les éléments s'empilent */
+        align-items: center;    /* Centrés horizontalement */
+        justify-content: flex-start; /* Commencent en haut */
+        gap: 30px;              /* Espace entre les liens */
+        
+        width: 100%; 
+        padding-top: 50px; 
+        transform: translateX(100%); 
+        transition: transform 0.3s ease-in;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links.nav-active { 
+        transform: translateX(0%); 
+    }
+    
+    .nav-links a { 
+        margin: 0; 
+        font-size: 1.2rem; 
+        display: block;
+    }
+    
+    /* 3. Gestion des Boutons */
+    .nav-cta { 
+        display: none; /* Cache le bouton "Commander" du header */
+    } 
+    
+    .cta-mobile { 
+        display: block; 
+        color: var(--primary) !important; 
+        font-weight: 800; 
+        font-size: 1.4rem; /* Un peu plus gros pour être visible */
+    }
+    
+    .burger { 
+        display: block; 
+    }
+
+    /* 4. Bouton CV Sticky en bas d'écran (Optionnel mais recommandé) */
+    .mobile-sticky-cta {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        background: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-radius: 50px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        z-index: 9999;
+        font-weight: bold;
+        text-decoration: none;
+        animation: slideUp 0.5s ease-out;
+    }
+}
+
+@keyframes slideUp { 
+    from { transform: translate(-50%, 100%); } 
+    to { transform: translate(-50%, 0); } 
+}
